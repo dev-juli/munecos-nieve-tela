@@ -1,91 +1,93 @@
 <template>
-  <div class="card">
-    <img v-if="imageUrl" :src="imageUrl" :alt="titulo" class="card-img" />
-    <h3 class="card-title">{{ titulo }}</h3>
-    <p class="card-desc">{{ descripcion }}</p>
-    <p class="card-precio">{{ precio }}</p>
-    <button class="card-btn">{{ boton }}</button>
+  <div class="muñeco-card">
+    <img :src="product.imagen" :alt="product.titulo" />
+    <div class="card-content">
+      <h3>{{ product.titulo }}</h3>
+      <p>{{ product.descripcion }}</p>
+      <span class="precio">{{ product.precio }}</span>
+      <a :href="whatsappUrl" target="_blank" class="cta">{{ product.boton }}</a>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Card",
+  name: "ProductCard",
   props: {
-    titulo: String,
-    descripcion: String,
-    precio: String,
-    boton: String,
-    imagen: String
+    product: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
-    imageUrl() {
-      if (!this.imagen) {
-        return null;
-      }
-      // Esto asume que las imágenes están en `src/assets`
-      // y este componente está en `src/components`
-      try {
-        return new URL(`../assets/${this.imagen}`, import.meta.url).href;
-      } catch (e) {
-        console.error(`No se pudo resolver la imagen: ${this.imagen}`);
-        return null;
-      }
-    }
-  }
+    whatsappUrl() {
+      const numero = '3165442220'; // Tu número de WhatsApp
+      const mensaje = `Hola, ¡lo quiero! Me interesa el muñeco: ${this.product.titulo}`;
+      return `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    },
+  },
 };
 </script>
 
 <style scoped>
-.card {
+.muñeco-card {
   background: #fff;
-  border: 2px solid #e2c97a;
   border-radius: 18px;
-  padding: 18px 14px 22px 14px;
+  box-shadow: 0 4px 15px rgba(212,175,55,0.08);
+  width: 260px;
   text-align: center;
-  width: 240px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  position: relative;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid #d4af37;
 }
-.card-img {
+.muñeco-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(212,175,55,0.18);
+}
+.muñeco-card img {
   width: 100%;
-  height: 140px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 10px;
 }
-.card-title {
-  font-size: 1.15rem;
-  color: #b22222;
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+h3 {
+  color: #7a1f23;
+  font-size: 1.1rem;
   margin-bottom: 6px;
+  font-family: 'Montserrat', serif;
+}
+p {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  flex-grow: 1;
+}
+.precio {
+  font-size: 1.2rem;
   font-weight: bold;
+  color: #d4af37;
+  margin-bottom: 12px;
 }
-.card-desc {
-  font-size: 0.98rem;
-  color: #666;
-  margin-bottom: 10px;
-}
-.card-precio {
-  font-size: 1.08rem;
-  color: #b22222;
-  font-weight: bold;
-  margin-bottom: 14px;
-}
-.card-btn {
-  background-color: #b22222;
-  color: white;
+.cta {
+  background: #b22222;
+  color: #fff;
   border: none;
-  padding: 8px 22px;
-  border-radius: 7px;
-  font-weight: bold;
-  font-size: 1rem;
+  border-radius: 8px;
+  padding: 10px 22px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  font-weight: 600;
+  font-size: 1rem;
   transition: background 0.2s;
+  align-self: center;
+  text-decoration: none;
 }
-.card-btn:hover {
-  background-color: #d8ca00;
-  color: #b22222;
+.cta:hover {
+  background-color: #c93434;
 }
 </style>

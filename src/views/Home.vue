@@ -1,232 +1,272 @@
 <template>
-  <div class="home">
-    <div class="hero">
-      <img :src="heroBgUrl" alt="Navidad" class="hero-bg" />
-      <div class="hero-content">
-        <h1>hacemos las cosas<br>con amor</h1>
-        <p>Cada muñeco es una obra de arte, hecho a mano con amor y dedicación.</p>
+  <div>
+    <!-- Sección Hero con fondo rojo vino -->
+    <section class="hero-section">
+      <div class="hero-content-wrapper">
+        <h1 class="hero-title">
+          hacemos las cosas<br />
+          con amor
+        </h1>
+        <p class="hero-desc">Cada muñeco es una obra de arte, hecho a mano con amor y dedicación.</p>
         <router-link to="/catalogo" class="cta">Explora Nuestra Colección</router-link>
       </div>
-    </div>
-    <div class="catalogo-preview">
-      <div
-        class="muñeco-preview-card"
-        v-for="muñeco in muñecos"
-        :key="muñeco.titulo"
-      >
-        <img :src="muñeco.imagen" :alt="muñeco.titulo" />
-        <div class="card-content">
-          <h3>{{ muñeco.titulo }}</h3>
-          <p>{{ muñeco.descripcion }}</p>
+    </section>
+
+    <!-- Sección catálogo con fondo verde oscuro -->
+    <section class="catalogo-preview" ref="catalogoSection" data-section-id="catalogo">
+      <h2 class="section-title verde">Catálogo</h2>
+      <div class="catalogo-cards">
+        <Card v-for="muñeco in muñecos" :key="muñeco.titulo" :product="muñeco" />
+      </div>
+    </section>
+
+    <!-- Sección personaliza con fondo rojo vino -->
+    <section class="personaliza-section" ref="personalizaSection" data-section-id="personaliza">
+      <div class="personaliza-container">
+        <div class="personaliza-image">
+          <img src="@/assets/imagen1.jpg" alt="Personaliza" />
+        </div>
+        <div class="personaliza-content">
+          <h2 class="section-title rojo">¿Quieres un Muñeco de Nieve Único?</h2>
+          <p>Crea tu propio muñeco de nieve artesanal. Elige colores, accesorios y detalles que lo hagan especial.</p>
+          <a class="whatsapp" href="https://wa.me/3165442220" target="_blank">¡Personalízalo vía WhatsApp!</a>
         </div>
       </div>
-    </div>
-    <div class="personaliza-section">
-      <h2>¿Quieres un Muñeco de Nieve Único?</h2>
-      <p>Crea tu propio muñeco de nieve artesanal. Elige colores, accesorios y detalles que lo hagan especial.</p>
-      <a class="whatsapp" href="https://wa.me/3165442220" target="_blank">¡Personalízalo vía WhatsApp!</a>
-          <img :src="personalizaUrl" alt="Personaliza" />
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import heroBgUrl from '@/assets/fondo.jpg';
-import personalizaUrl from '@/assets/imagen1.jpg';
-import muñecoImg from '@/assets/muñeco.jpg';
-import meñecaImg from '@/assets/meñeca vieja.jpg';
-import dosmuñecosImg from '@/assets/dosmuñecos.jpg';
-import cositasImg from '@/assets/cositas.jpg';
+import { products } from './products.js';
+import Card from '@/components/Card.vue';
 
 export default {
   name: "Home",
+  components: { Card },
   data() {
     return {
-      heroBgUrl,
-      personalizaUrl,
-      muñecos: [
-        {
-          titulo: "El Clásico Nevado",
-          descripcion: "Nuestro muñeco de nieve original. Ideal para tu decoración de Navidad.",
-          imagen: muñecoImg,
-        },
-        {
-          titulo: "Sra. Elegante",
-          descripcion: "Una dama de nieve, perfecta para un toque de distinción.",
-          imagen: meñecaImg,
-        },
-        {
-          titulo: "Pareja de nieve",
-          descripcion: "Encantadores y tiernos, ideal para las decoraciones.",
-          imagen: dosmuñecosImg,
-        },
-      ],
+      muñecos: products,
+      observer: null,
+      intersectingSections: new Set(),
     };
+  },
+  watch: {
+    intersectingSections: {
+      handler(newSet) {
+        // La sección 'personaliza' está más abajo, le damos prioridad si ambas están visibles.
+        if (newSet.has('personaliza')) {
+          this.$emit('header-theme', 'green-theme');
+        } else if (newSet.has('catalogo')) {
+          this.$emit('header-theme', 'red-theme');
+        } else {
+          this.$emit('header-theme', 'default');
+        }
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const sectionId = entry.target.dataset.sectionId;
+          if (entry.isIntersecting) {
+            this.intersectingSections.add(sectionId);
+          } else {
+            this.intersectingSections.delete(sectionId);
+          }
+        });
+      },
+      { threshold: 0.3 } // Se activa cuando el 30% de la sección es visible
+    );
+
+    if (this.$refs.catalogoSection) this.observer.observe(this.$refs.catalogoSection);
+    if (this.$refs.personalizaSection) this.observer.observe(this.$refs.personalizaSection);
+  },
+  beforeUnmount() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    // Resetea el tema al salir de la página de inicio
+    this.$emit('header-theme', 'default');
   },
 };
 </script>
 
 <style scoped>
-.home {
-  /* Añadimos padding horizontal para que no se pegue a los bordes en móvil */
-  padding: 24px 16px;
-}
-.hero {
+.hero-section {
   position: relative;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 32px;
-  /* Truco para que el hero ocupe todo el ancho a pesar del padding del padre */
-  margin-left: -16px;
-  margin-right: -16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 24px;
+  text-align: center;
+  background-image: url('@/assets/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
 }
-.hero-bg {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-.hero-content {
+.hero-section::before {
+  content: '';
   position: absolute;
-  top: 30px;
-  left: 40px;
-  color: #b22222;
-  text-shadow: 0 2px 8px #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Overlay oscuro para legibilidad */
+  z-index: 1;
 }
-.hero-content h1 {
-  font-size: 2.8rem;
+.hero-title {
+  font-size: 3.2rem;
   font-weight: bold;
-  margin-bottom: 12px;
-}
-.hero-content p {
-  font-size: 1.1rem;
+  color: #d4af37;
   margin-bottom: 18px;
+  font-family: 'Montserrat', serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.hero-desc {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  color: #fff;
 }
 .cta {
-  background: #b22222;
+  background: linear-gradient(90deg, #d4af37 60%, #b22222 100%);
   color: #fff;
   border: none;
-  padding: 10px 28px;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
   text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 18px;
   display: inline-block;
+  box-shadow: 0 2px 8px #d4af3722;
+  transition: background 0.2s;
 }
+.cta:hover {
+  background: #d4af37;
+  color: #7a1f23;
+}
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+/* Sección catálogo verde oscuro */
 .catalogo-preview {
+  background: #1c2a22;
+  padding: 48px 0 32px 0;
+  border-radius: 32px;
+  margin-top: 0; /* Ya no se superpone con el hero */
+  box-shadow: 0 4px 24px #0002;
+}
+.section-title.verde {
+  color: #d4af37;
+  font-size: 2rem;
+  font-family: 'Montserrat', serif;
+  margin-bottom: 32px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.catalogo-cards {
   display: flex;
   gap: 24px;
   justify-content: center;
-  flex-wrap: wrap; /* Permitimos que las tarjetas pasen a la siguiente línea */
-  margin-bottom: 32px;
+  flex-wrap: wrap;
 }
-.muñeco-preview-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  width: 260px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-.muñeco-preview-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-}
-.muñeco-preview-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-.card-content {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.muñeco-preview-card h3 {
-  color: #b22222;
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-}
-.muñeco-preview-card p {
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  flex-grow: 1;
-}
+
+/* Sección personaliza rojo vino */
 .personaliza-section {
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  text-align: center;
+  background: #7a1f23;
+  border-radius: 32px;
+  padding: 48px 32px;
   box-shadow: 0 2px 12px #0001;
+  margin: 48px 0;
 }
-.personaliza-section h2 {
-  color: #b22222;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+.personaliza-container {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.personaliza-image {
+  flex: 0 0 40%;
+}
+.personaliza-image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.personaliza-content {
+  flex: 1;
+  text-align: left;
+}
+.section-title.rojo {
+  color: #d4af37;
+  font-size: 2.2rem;
+  font-family: 'Montserrat', serif;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  text-align: left;
 }
 .personaliza-section p {
-  font-size: 1rem;
-  margin-bottom: 14px;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  color: #fff;
 }
 .whatsapp {
-  background: #ff9800;
+  background: linear-gradient(90deg, #d4af37 60%, #ff9800 100%);
   color: #fff;
   border: none;
   border-radius: 6px;
-  padding: 8px 22px;
-  font-size: 1rem;
+  padding: 12px 28px;
+  font-size: 1.1rem;
   cursor: pointer;
   margin-bottom: 12px;
   text-decoration: none;
   display: inline-block;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #d4af3722;
+  transition: background 0.2s;
 }
-.personaliza-section img {
-  width: 320px;
-  margin-top: 14px;
-  border-radius: 8px;
-}
-
-/* --- Media Queries para Responsividad --- */
-
-@media (max-width: 768px) {
-  .hero-content {
-    left: 30px;
-  }
-  .hero-content h1 {
-    font-size: 2.2rem;
-  }
-  .hero-content p {
-    font-size: 1rem;
-  }
+.whatsapp:hover {
+  background: #d4af37;
+  color: #7a1f23;
 }
 
-@media (max-width: 480px) {
-  .hero {
-    height: 250px;
+/* Responsividad */
+@media (max-width: 1024px) {
+  .hero-section {
+    height: 80vh; /* Reducir altura en pantallas más pequeñas */
   }
-  .hero-bg {
-    height: 100%; /* La imagen de fondo ocupa toda la altura del contenedor */
+  .catalogo-cards {
+    flex-direction: column;
+    align-items: center;
   }
-  .hero-content {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centramos el contenido perfectamente */
-    width: 90%;
+  .personaliza-container {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .personaliza-content,
+  .personaliza-content .section-title.rojo {
     text-align: center;
   }
-  .muñeco-preview-card {
-    /* En pantallas pequeñas, la tarjeta ocupa más ancho */
-    width: 90%;
-    max-width: 340px;
+}
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
   }
-  .personaliza-section img {
-    /* La imagen se ajusta al contenedor para evitar desbordamiento */
-    width: 100%;
+  .catalogo-preview {
+    padding: 32px 16px;
+    border-radius: 12px;
+  }
+  .personaliza-section {
+    padding: 32px 16px;
+    border-radius: 24px;
   }
 }
 </style>
