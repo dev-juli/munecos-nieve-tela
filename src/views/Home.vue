@@ -10,15 +10,15 @@
     </div>
     <div class="catalogo-preview">
       <div
-        class="muñeco-card"
+        class="muñeco-preview-card"
         v-for="muñeco in muñecos"
         :key="muñeco.titulo"
       >
         <img :src="muñeco.imagen" :alt="muñeco.titulo" />
-        <h3>{{ muñeco.titulo }}</h3>
-        <p>{{ muñeco.descripcion }}</p>
-        <span class="precio">{{ muñeco.precio }}</span>
-        <button class="cta">{{ muñeco.boton }}</button>
+        <div class="card-content">
+          <h3>{{ muñeco.titulo }}</h3>
+          <p>{{ muñeco.descripcion }}</p>
+        </div>
       </div>
     </div>
     <div class="personaliza-section">
@@ -121,47 +121,41 @@ export default {
   flex-wrap: wrap; /* Permitimos que las tarjetas pasen a la siguiente línea */
   margin-bottom: 32px;
 }
-.muñeco-card {
+.muñeco-preview-card {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px #0001;
-  padding: 18px;
-  width: 210px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  width: 260px;
   text-align: center;
-  /* Usamos flexbox para alinear el contenido interno verticalmente */
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
-.muñeco-card img {
-  width: 90px;
-  height: 90px;
+.muñeco-preview-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+.muñeco-preview-card img {
+  width: 100%;
+  height: 220px;
   object-fit: cover;
-  margin-bottom: 10px;
 }
-.muñeco-card h3 {
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.muñeco-preview-card h3 {
   color: #b22222;
   font-size: 1.1rem;
   margin-bottom: 6px;
 }
-.muñeco-card p {
+.muñeco-preview-card p {
   font-size: 0.95rem;
   margin-bottom: 8px;
-  /* Hacemos que la descripción ocupe el espacio sobrante */
   flex-grow: 1;
-}
-.precio {
-  display: block;
-  color: #b22222;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.muñeco-card .cta {
-  background: #b22222;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 7px 18px;
-  cursor: pointer;
 }
 .personaliza-section {
   background: #fff;
@@ -225,7 +219,7 @@ export default {
     width: 90%;
     text-align: center;
   }
-  .muñeco-card {
+  .muñeco-preview-card {
     /* En pantallas pequeñas, la tarjeta ocupa más ancho */
     width: 90%;
     max-width: 340px;
