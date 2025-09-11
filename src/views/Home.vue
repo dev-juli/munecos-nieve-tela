@@ -47,23 +47,18 @@ export default {
       muñecos: [
         {
           titulo: "El Clásico Nevado",
-          descripcion: "Nuestro muñeco de nieve original. Ideal para tu decoración y cumpleaños.",
+          descripcion: "Nuestro muñeco de nieve original. Ideal para tu decoración de Navidad.",
           imagen: muñecoImg,
         },
         {
-          titulo: "Sr. Elegante",
-          descripcion: "Un caballero de nieve, perfecto para un toque de distinción.",
+          titulo: "Sra. Elegante",
+          descripcion: "Una dama de nieve, perfecta para un toque de distinción.",
           imagen: meñecaImg,
         },
         {
-          titulo: "Sr. Dulce Nieve",
-          descripcion: "Encantador y tierno, ideal para los más pequeños.",
+          titulo: "Pareja de nieve",
+          descripcion: "Encantadores y tiernos, ideal para las decoraciones.",
           imagen: dosmuñecosImg,
-        },
-        {
-          titulo: "El Aventurero Congelado",
-          descripcion: "Listo para la exploración, con espíritu intrépido y juguetón.",
-          imagen: cositasImg,
         },
       ],
     };
@@ -73,7 +68,8 @@ export default {
 
 <style scoped>
 .home {
-  padding: 24px 0;
+  /* Añadimos padding horizontal para que no se pegue a los bordes en móvil */
+  padding: 24px 16px;
 }
 .hero {
   position: relative;
@@ -81,6 +77,9 @@ export default {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 32px;
+  /* Truco para que el hero ocupe todo el ancho a pesar del padding del padre */
+  margin-left: -16px;
+  margin-right: -16px;
 }
 .hero-bg {
   width: 100%;
@@ -119,6 +118,7 @@ export default {
   display: flex;
   gap: 24px;
   justify-content: center;
+  flex-wrap: wrap; /* Permitimos que las tarjetas pasen a la siguiente línea */
   margin-bottom: 32px;
 }
 .muñeco-card {
@@ -128,6 +128,9 @@ export default {
   padding: 18px;
   width: 210px;
   text-align: center;
+  /* Usamos flexbox para alinear el contenido interno verticalmente */
+  display: flex;
+  flex-direction: column;
 }
 .muñeco-card img {
   width: 90px;
@@ -143,6 +146,8 @@ export default {
 .muñeco-card p {
   font-size: 0.95rem;
   margin-bottom: 8px;
+  /* Hacemos que la descripción ocupe el espacio sobrante */
+  flex-grow: 1;
 }
 .precio {
   display: block;
@@ -190,5 +195,44 @@ export default {
   width: 320px;
   margin-top: 14px;
   border-radius: 8px;
+}
+
+/* --- Media Queries para Responsividad --- */
+
+@media (max-width: 768px) {
+  .hero-content {
+    left: 30px;
+  }
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 250px;
+  }
+  .hero-bg {
+    height: 100%; /* La imagen de fondo ocupa toda la altura del contenedor */
+  }
+  .hero-content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centramos el contenido perfectamente */
+    width: 90%;
+    text-align: center;
+  }
+  .muñeco-card {
+    /* En pantallas pequeñas, la tarjeta ocupa más ancho */
+    width: 90%;
+    max-width: 340px;
+  }
+  .personaliza-section img {
+    /* La imagen se ajusta al contenedor para evitar desbordamiento */
+    width: 100%;
+  }
 }
 </style>

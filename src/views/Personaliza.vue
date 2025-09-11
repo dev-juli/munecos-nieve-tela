@@ -20,6 +20,7 @@ export default {
 
 <style scoped>
 .personaliza {
+  box-sizing: border-box;
   background: #fff;
   border-radius: 12px;
   padding: 32px;
@@ -27,6 +28,8 @@ export default {
   box-shadow: 0 2px 12px #0001;
   margin: 32px auto;
   max-width: 500px;
+  /* Hacemos que la tarjeta ocupe el 90% del ancho disponible */
+  width: 90%;
 }
 .personaliza img {
   width: 320px;
@@ -44,5 +47,17 @@ export default {
   margin-top: 18px;
   text-decoration: none;
   display: inline-block;
+}
+
+/* Media Query para Responsividad */
+@media (max-width: 480px) {
+  .personaliza {
+    /* Reducimos el padding en móviles para dar más espacio al contenido */
+    padding: 24px 16px;
+  }
+  .personaliza img {
+    /* La imagen se ajusta al contenedor para evitar desbordamiento */
+    width: 100%;
+  }
 }
 </style>

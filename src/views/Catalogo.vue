@@ -27,7 +27,7 @@ export default {
         {
           titulo: "El Clásico Nevado",
           descripcion: "Nuestro muñeco de nieve original. Ideal para tu decoración y cumpleaños.",
-          precio: "$45.00",
+          precio: "$250.000",
           imagen: muñecoImg,
           boton: "Encargar",
         },
@@ -60,7 +60,8 @@ export default {
 
 <style scoped>
 .catalogo {
-  padding: 32px 0;
+  /* Añadimos padding horizontal para que no se pegue a los bordes en móvil */
+  padding: 32px 16px;
   text-align: center;
 }
 .catalogo-lista {
@@ -76,12 +77,16 @@ export default {
   padding: 18px;
   width: 210px;
   text-align: center;
+  /* Usamos flexbox para alinear el contenido interno verticalmente */
+  display: flex;
+  flex-direction: column;
 }
 .muñeco-card img {
   width: 90px;
   height: 90px;
   object-fit: cover;
   margin-bottom: 10px;
+  align-self: center; /* Centramos la imagen en el contenedor flex */
 }
 .muñeco-card h3 {
   color: #b22222;
@@ -91,6 +96,8 @@ export default {
 .muñeco-card p {
   font-size: 0.95rem;
   margin-bottom: 8px;
+  /* Hacemos que la descripción ocupe el espacio sobrante para alinear los botones */
+  flex-grow: 1;
 }
 .precio {
   display: block;
@@ -105,5 +112,14 @@ export default {
   border-radius: 6px;
   padding: 7px 18px;
   cursor: pointer;
+}
+
+/* Media Query para hacer el diseño adaptable a dispositivos móviles */
+@media (max-width: 480px) {
+  .muñeco-card {
+    /* En pantallas pequeñas, la tarjeta ocupa más ancho */
+    width: 90%;
+    max-width: 340px; /* Evita que la tarjeta sea demasiado ancha */
+  }
 }
 </style>
