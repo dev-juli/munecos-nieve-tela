@@ -27,7 +27,7 @@ export default {
 
 <style>
 body {
-  background: url('@/assets/bg-snow.jpg') repeat;
+  background: linear-gradient(to bottom, #e6ced0, #ffffff);
   min-height: 100vh;
   margin: 0;
   font-family: 'Montserrat', sans-serif;

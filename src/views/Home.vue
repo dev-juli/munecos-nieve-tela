@@ -25,13 +25,13 @@
       <h2>¿Quieres un Muñeco de Nieve Único?</h2>
       <p>Crea tu propio muñeco de nieve artesanal. Elige colores, accesorios y detalles que lo hagan especial.</p>
       <a class="whatsapp" href="https://wa.me/3165442220" target="_blank">¡Personalízalo vía WhatsApp!</a>
-      <img :src="personalizaUrl" alt="Personaliza" />
+          <img :src="personalizaUrl" alt="Personaliza" />
     </div>
   </div>
 </template>
 
 <script>
-import heroBgUrl from '@/assets/fondo debajo header.jpg';
+import heroBgUrl from '@/assets/fondo.jpg';
 import personalizaUrl from '@/assets/imagen1.jpg';
 import muñecoImg from '@/assets/muñeco.jpg';
 import meñecaImg from '@/assets/meñeca vieja.jpg';
