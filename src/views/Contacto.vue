@@ -30,11 +30,6 @@ export default {
 };
 </script>
 
-<!--
-  NOTA: Para la nueva tipografía, asegúrate de importar 'Playfair Display' en tu proyecto.
-  Puedes añadir esto en tu `index.html`:
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
--->
 <style scoped>
 .contacto-page {
   background: #1c2a22; /* Verde oscuro, como en Home */
