@@ -1,35 +1,38 @@
-import muñecoImg from '@/assets/muñeco.jpg';
-import meñecaImg from '@/assets/meñeca vieja.jpg';
-import dosmuñecosImg from '@/assets/dosmuñecos.jpg';
-import cositasImg from '@/assets/cositas.jpg';
+import muñecoImg from '../assets/muñeco.jpg';
+import meñecaImg from '../assets/meñeca vieja.jpg';
+import dosmuñecosImg from '../assets/dosmuñecos.jpg';
+import cositasImg from '../assets/cositas.png';
+import bolitaImg from '../assets/bolita.png';
 
 export const products = [
   {
-    titulo: "El Clásico Nevado",
-    descripcion: "Nuestro muñeco de nieve original. Ideal para tu decoración y cumpleaños.",
-    precio: "$250.000",
+    titulo: 'El Clásico Nevado',
+    descripcion: 'El alma de la Navidad en tu hogar. Tejido con tradición y cariño, este muñeco con base de madera es la pieza central perfecta.',
+    precio: '$350.000 COP',
     imagen: muñecoImg,
-    boton: "Encargar",
   },
   {
-    titulo: "Sr. Elegante",
-    descripcion: "Un caballero de nieve, perfecto para un toque de distinción.",
-    precio: "$55.00",
+    titulo: 'Doña Nieve',
+    descripcion: 'Elegancia y magia en un vestido festivo. Doña Nieve se sostiene sola sobre su base de madera, capturando la sofisticación de la temporada.',
+    precio: '$400.000 COP',
     imagen: meñecaImg,
-    boton: "Encargar",
   },
   {
-    titulo: "Sr. Dulce Nieve",
-    descripcion: "Encantador y tierno, ideal para los más pequeños.",
-    precio: "$40.00",
+    titulo: 'Pareja Nevada',
+    descripcion: 'La pareja perfecta para tu decoración. Juntos, sobre su base de madera, representan la unión y el espíritu festivo.',
+    precio: '$650.000 COP',
     imagen: dosmuñecosImg,
-    boton: "Encargar",
   },
   {
-    titulo: "El Aventurero Congelado",
-    descripcion: "Listo para la exploración, con espíritu intrépido y juguetón.",
-    precio: "$48.00",
+    titulo: 'Bolita de Nieve',
+    descripcion: 'Adorable y tierno. Con base de madera, telas finas y relleno de algodón siliconado. ¡Pura ternura en un muñeco!',
+    precio: '$350.000 COP',
+    imagen: bolitaImg,
+  },
+  {
+    titulo: 'Detalles Encantados',
+    descripcion: 'Pequeños tesoros para complementar tu decoración. Botas, renos y más, hechos con el mismo amor y detalle.',
+    precio: 'Desde $50.000 COP',
     imagen: cositasImg,
-    boton: "Encargar",
   },
 ];

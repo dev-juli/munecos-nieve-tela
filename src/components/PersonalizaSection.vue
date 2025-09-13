@@ -1,8 +1,8 @@
 <template>
-  <div class="personaliza-wrapper">
+  <section class="personaliza-section">
     <div class="personaliza-container">
       <div class="personaliza-image">
-        <img src="../assets/image1.png" alt="Personaliza tu muñeco de nieve" />
+        <img src="@/assets/imagen1.png" alt="Personaliza tu muñeco de nieve" />
       </div>
       <div class="personaliza-content">
         <h2 class="section-title">¿Quieres un Muñeco de Nieve Único?</h2>
@@ -15,22 +15,19 @@
         </a>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
-<script>
-export default {
-  name: "Personaliza",
-};
+<script setup>
+// Este componente es puramente presentacional.
 </script>
 
 <style scoped>
-.personaliza-wrapper {
+.personaliza-section {
   background: #7a1f23; /* Rojo vino */
-  min-height: 100vh;
-  padding: 110px 32px 60px; /* 90px navbar + 20px espacio */
+  padding: 64px 32px;
+  width: 100%;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .personaliza-container {
@@ -39,7 +36,6 @@ export default {
   gap: 48px;
   max-width: 960px;
   margin: 0 auto;
-  color: #fff;
 }
 
 .personaliza-image {
@@ -62,6 +58,7 @@ export default {
 .personaliza-content {
   flex: 1;
   text-align: left;
+  color: #fff;
 }
 
 .section-title {
@@ -105,9 +102,9 @@ export default {
   .personaliza-container {
     flex-direction: column;
     gap: 32px;
-    text-align: center;
   }
-  .personaliza-content {
+  .personaliza-content,
+  .section-title {
     text-align: center;
   }
 }
