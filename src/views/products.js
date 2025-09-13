@@ -2,7 +2,7 @@ import muñecoImg from '../assets/muñeco.jpg';
 import meñecaImg from '../assets/meñeca vieja.jpg';
 import dosmuñecosImg from '../assets/dosmuñecos.jpg';
 import cositasImg from '../assets/cositas.png';
-import bolitaImg from '../assets/bolita.png';
+import bolitaImg from '../assets/Bolita.png';
 
 export const products = [
   {
