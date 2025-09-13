@@ -10,14 +10,6 @@
       <div class="contacto-info">
         <div class="info-item">
           <h3>
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            Email
-          </h3>
-          <p>Para consultas generales y pedidos especiales.</p>
-          <a href="mailto:info@christmasdreams.com" class="cta-contacto">info@christmasdreams.com</a>
-        </div>
-        <div class="info-item">
-          <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="icon" stroke="none"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.166l-1.225 4.485 4.574-1.196zM12 18c-3.313 0-6-2.687-6-6s2.687-6 6-6 6 2.687 6 6-2.687 6-6 6zm0-10c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm3.225 6.225c-.14-.28-.502-.442-.683-.498-.182-.055-1.062-.523-1.228-.58-.165-.056-.285-.087-.405.087-.12.175-.463.58-.568.698-.105.118-.21.132-.39.087-.18-.045-1.252-.462-2.38-1.468-.88-.78-1.48-1.742-1.656-2.04-.175-.3-.018-.462.07-.603.08-.13.175-.213.262-.338.088-.125.118-.213.175-.353.057-.14.028-.263-.018-.353-.045-.09-.405-1.012-.555-1.38-.148-.368-.3-.318-.42-.318h-.42c-.12 0-.3.045-.463.213-.165.168-.63.615-.63 1.5 0 .885.645 1.742 1.44 2.615.8.873 1.853 1.592 3.225 2.198.313.145.564.24.763.312.2.073.54.06.75-.045.21-.105.63-.435.72-.86.09-.425.09-.788.06-.86-.03-.073-.12-.118-.262-.213z"></path></svg>
             WhatsApp
           </h3>
@@ -139,8 +131,9 @@ export default {
 
 @media (min-width: 768px) {
   .contacto-info {
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    /* Ajustamos para centrar la única tarjeta de contacto */
+    grid-template-columns: minmax(0, 450px);
+    justify-content: center;
   }
 }
 </style>
