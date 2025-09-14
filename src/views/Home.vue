@@ -39,9 +39,8 @@ export default {
   components: { Card },
   data() {
     return {
-      featuredProducts: products.filter(
-        (p) => p.titulo === 'El Clásico Nevado' || p.titulo === 'Doña Nieve'
-      ),
+      // Ampliamos la selección para que el carrusel tenga más elementos
+      featuredProducts: products.filter((p) => p.featured),
     };
   },
 };
@@ -130,6 +129,8 @@ export default {
   gap: 24px;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .cta-container {
