@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import TheNavbar from './TheNavbar.vue';
+import TheNavbar from '../src/components/TheNavbar.vue';
 
 export default {
-  name: "App",
+  name: "App",ar
   components: {
     TheNavbar,
   },
