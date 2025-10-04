@@ -9,7 +9,7 @@
 import TheNavbar from '../src/components/TheNavbar.vue';
 
 export default {
-  name: "App",ar
+  name: "App",
   components: {
     TheNavbar,
   },
