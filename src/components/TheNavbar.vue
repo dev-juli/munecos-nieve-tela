@@ -36,7 +36,7 @@
 
 <script setup>
 import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
-import logoUrl from './assets/Logo.png';
+import logoUrl from '@/assets/Logo.png';
 
 const isMobileNavOpen = ref(false);
 const hamburgerButton = ref(null);

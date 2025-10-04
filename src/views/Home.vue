@@ -55,7 +55,7 @@ export default {
   height: 100vh;
   padding: 0 24px;
   text-align: center;
-  background-image: url('../assets/fondo.jpg');
+  background-image: url('@/assets/fondo.jpg');
   background-size: cover;
   background-position: center;
   color: #fff;

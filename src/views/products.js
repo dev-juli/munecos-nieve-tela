@@ -1,14 +1,14 @@
-import munecoImg from '../assets/muñeco.jpg';
-import menecaImg from '../assets/meñecavieja.jpg';
-import dosmunecosImg from '../assets/dosmuñecos.jpg';
-import papaNoel1Img from '../assets/papaNoel1.jpg';
-import img3blancos from '../assets/3blancos.png';
-import img3amigos from '../assets/3amigos.png';
-import img3compañeros from '../assets/3compañeros.png';
-import jengibre from '../assets/jengibre.png';
-import losDuendes from '../assets/losDuendes.png';
-import nevin from '../assets/nevin.png';
-import sombreron from '../assets/sombreron.png';
+import munecoImg from '@/assets/muñeco.jpg';
+import menecaImg from '@/assets/meñecavieja.jpg';
+import dosmunecosImg from '@/assets/dosmuñecos.jpg';
+import papaNoel1Img from '@/assets/papaNoel1.jpg';
+import img3blancos from '@/assets/3blancos.png';
+import img3amigos from '@/assets/3amigos.png';
+import img3compañeros from '@/assets/3compañeros.png';
+import jengibre from '@/assets/jengibre.png';
+import losDuendes from '@/assets/losDuendes.png';
+import nevin from '@/assets/nevin.png';
+import sombreron from '@/assets/sombreron.png';
 
 
 
